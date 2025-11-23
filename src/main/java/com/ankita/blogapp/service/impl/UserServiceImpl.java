@@ -3,12 +3,14 @@ package com.ankita.blogapp.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ankita.blogapp.dto.UserDto;
 import com.ankita.blogapp.entity.User;
 import com.ankita.blogapp.repository.UserRepository;
 import com.ankita.blogapp.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 	 @Autowired
 	    private UserRepository userRepo;
@@ -35,5 +37,7 @@ public class UserServiceImpl implements UserService{
                 .stream().map(this::convertToDto)
                 .toList();
 	}
+	
+	
 
 }
