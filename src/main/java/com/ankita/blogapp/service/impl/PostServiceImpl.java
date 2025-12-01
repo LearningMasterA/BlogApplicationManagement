@@ -3,6 +3,9 @@ package com.ankita.blogapp.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ankita.blogapp.dto.PostDto;
@@ -99,6 +102,37 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		postRepo.deleteById(id);
 		
+	}
+
+
+	@Override
+	public Page<PostDto> getAllPosts(int page, int size, String sortBy) {
+		// TODO Auto-generated method stub
+		PageRequest pageable=PageRequest.of(page, size, Sort.by(sortBy).descending());
+		Page<Post> posts=postRepo.findAll(pageable);
+		return posts.map(this::convertToDto);
+	}
+
+
+	@Override
+	public List<PostDto> searchPosts(String Keyword) {
+		return postRepo.findByTitleContainingIgnoreCase(Keyword)
+				.stream().map(this::convertToDto).toList();
+	}
+
+
+	@Override
+	public List<PostDto> getPostsByCategory(int categoryId) {
+		return postRepo.findByCategoryCatId(categoryId)
+				.stream().map(this::convertToDto).toList();
+	}
+
+
+	@Override
+	public List<PostDto> getPostsByUser(int userId) {
+		return postRepo.findByUserId(userId)
+				.stream().map(this::convertToDto)
+				.toList();
 	}
 
 }
