@@ -86,6 +86,4 @@ public class PostController {
 	public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable int userId){
 		return ResponseEntity.ok(postService.getPostsByUser(userId));
 	}
-	
-
 }
