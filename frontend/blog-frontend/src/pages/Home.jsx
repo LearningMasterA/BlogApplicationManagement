@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { Link } from "react-router-dom";
 
 function Home(){
   const [posts,setPosts]=useState([]);
@@ -27,24 +28,28 @@ function Home(){
   return (
     <div className="container mt-5">
       <h2>All Posts</h2>
-      <div className="row mt-3">
+      <div className="row mt-3 p-3">
         {posts?.map((post)=>(
-          <div className="col-md-4" key={post.pid}>
+          <div className="col-md-4 p-5" key={post.pid}>
             <div className="card-body">
               <h5 className="card-title">{post.title}</h5>
               <p className="card-text">{post.content.substring(0,100)}...</p>
-              <a href={`/post/${post.pid}`} className="btn btn-primary">Read more...</a>
+              {/* <a href={`/post/${post.pid}`} className="btn btn-primary">Read more...</a> */}
+              <Link to={`/post/${post.pid}`} className="btn btn-primary btn-sm">
+               Read more
+              </Link>
+
             </div>
           </div>
         ))}
       </div>
 
       <div className="d-flex justify-content-center mt-4">
-        <button className="btn btn-secondary" disabled={page===0} onClick={
+        <button className="btn btn-secondary m-3" disabled={page===0} onClick={
           ()=>setPage(page-1)
         }>Previous</button>
 
-        <button className="btn btn-secondary" disabled={page===totalPages-1} onClick={
+        <button className="btn btn-secondary m-3" disabled={page===totalPages-1} onClick={
           ()=>setPage(page+1)
         }>Next</button>
 
