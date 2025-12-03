@@ -7,6 +7,8 @@ import SinglePost from './pages/SinglePost'
 import Navbar from './components/Navbar';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
+import SearchResults from './pages/SearchResults';
+import CategoryPosts from './pages/CategoryPosts';
 
 function App(){
   return (
@@ -19,7 +21,8 @@ function App(){
       <Route path="/posts/:id" element={<SinglePost />} />
       <Route path="/posts/:id/edit" element={<EditPost/>}/>
       <Route path='/create' element={<CreatePost />}/>
-
+      <Route path='/search' element={<SearchResults/>}/>
+      <Route path='/category/:id' element={<CategoryPosts/>}/>
     </Routes>
     </BrowserRouter>
   );
