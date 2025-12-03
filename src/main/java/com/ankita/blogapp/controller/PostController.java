@@ -55,6 +55,12 @@ public class PostController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<PostDto> updatePost(@PathVariable int id,@RequestBody PostDto postDto){
+		String username=SecurityContextHolder.getContext().getAuthentication().getName();
+		User user=userRepo.findByUsername(username);
+		if (user == null) {
+	        return ResponseEntity.status(403).body(null);
+	    }
+		postDto.setUserId(user.getId());
 		return ResponseEntity.ok(postService.updatePost(id, postDto));
 	}
 	

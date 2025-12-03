@@ -48,7 +48,7 @@ public class PostServiceImpl implements PostService{
 		PostDto postDto=new PostDto();
 		postDto.setPid(post.getPid());
 		postDto.setTitle(post.getTitle());
-		postDto.setContent(post.getTitle());
+		postDto.setContent(post.getContent());
 		postDto.setImage(post.getImage());
 		if (post.getUser() != null) {
 		    postDto.setUserId(post.getUser().getId());
@@ -89,9 +89,9 @@ public class PostServiceImpl implements PostService{
 		post.setImage(postDto.getImage());
 		
 //		Fetch data from DB
-		User user=userRepo.findById(postDto.getUserId()).orElseThrow(()-> new RuntimeException("User not found"));
+//		User user=userRepo.findById(postDto.getUserId()).orElseThrow(()-> new RuntimeException("User not found"));
 		Category category=categoryRepo.findById(postDto.getCategoryId()).orElseThrow(()-> new RuntimeException("Category not found"));
-		post.setUser(user);
+//		post.setUser(user);
 		post.setCategory(category);
 		Post updated=postRepo.save(post);
 		return convertToDto(updated);
