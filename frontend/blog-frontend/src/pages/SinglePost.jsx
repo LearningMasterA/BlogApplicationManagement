@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 export default function SinglePost() {
+  const navigate=useNavigate();
   const { id } = useParams();     // post ID from URL
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,6 @@ export default function SinglePost() {
       console.error("Error Loading Post", err);
       setError("Unable to load post.");
     }
-
     setLoading(false);
   };
 
@@ -33,6 +33,18 @@ export default function SinglePost() {
   if (error) return <p className="text-danger">{error}</p>;
 
   if (!post) return null;
+  const handleDelete=async()=>{
+    if(!confirm("Are you sure you want to delete this post?")) return;
+    try{
+      await api.delete(`/posts/${id}`)
+      alert("Post deleted successfully!!");
+      return navigate("/");
+    }
+    catch(err){
+      console.log("Delete error:",err);
+      alert("Could not delete this post");
+    }
+  }
 
   return (
     <div className="mt-4">
@@ -60,11 +72,11 @@ export default function SinglePost() {
         </p>
 
         <div className="d-flex justify-content-end mt-4">
-          <Link className="btn btn-warning me-2" to={`/edit/${post.pid}`}>
+          <Link className="btn btn-warning me-2" to={`/posts/${post.pid}/edit`}>
             ✏ Edit
           </Link>
           
-          <button className="btn btn-danger">
+          <button className="btn btn-danger" onClick={handleDelete}>
             🗑 Delete
           </button>
         </div>

@@ -13,7 +13,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 	private final SecretKey key=Keys.hmacShaKeyFor("ankita_super_secure_secret_key_123456789".getBytes());
-	private long expiration=86400000;
+	private long expiration=30L * 24 * 60 * 60 * 1000;
 	public  String generateToken(String username) {
 		return Jwts.builder()
 				.subject(username)

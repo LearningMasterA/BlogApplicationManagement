@@ -8,6 +8,7 @@ api.interceptors.request.use((config)=>{
   console.log("TOKEN INSIDE INTERCEPTOR:", token);
   if(token && token!=="null" && token!=="undefined"){
     config.headers.Authorization=`Bearer ${token}`;
+    console.log("TOKEN:", localStorage.getItem("token"));
   }else{
     delete config.headers.Authorization;
   }

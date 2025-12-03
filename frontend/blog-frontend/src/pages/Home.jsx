@@ -35,7 +35,7 @@ function Home(){
               <h5 className="card-title">{post.title}</h5>
               <p className="card-text">{post.content.substring(0,100)}...</p>
               {/* <a href={`/post/${post.pid}`} className="btn btn-primary">Read more...</a> */}
-              <Link to={`/post/${post.pid}`} className="btn btn-primary btn-sm">
+              <Link to={`/posts/${post.pid}`} className="btn btn-primary btn-sm">
                Read more
               </Link>
 

@@ -5,7 +5,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import SinglePost from './pages/SinglePost'
 import Navbar from './components/Navbar';
-// import CreatePost from './pages/CreatePost';
+import CreatePost from './pages/CreatePost';
+import EditPost from './pages/EditPost';
 
 function App(){
   return (
@@ -15,8 +16,9 @@ function App(){
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
-      <Route path="/post/:id" element={<SinglePost />} />
-      {/* <Route path='/create' element={<CreatePost />}/> */}
+      <Route path="/posts/:id" element={<SinglePost />} />
+      <Route path="/posts/:id/edit" element={<EditPost/>}/>
+      <Route path='/create' element={<CreatePost />}/>
 
     </Routes>
     </BrowserRouter>
