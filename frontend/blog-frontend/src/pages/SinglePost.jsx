@@ -5,9 +5,10 @@ import api from "../services/api";
 export default function SinglePost() {
   const navigate=useNavigate();
   const { id } = useParams();     // post ID from URL
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  
 
   const fetchPost = async () => {
     setLoading(true);
@@ -31,7 +32,8 @@ export default function SinglePost() {
   if (loading) return <h3>Loading post...</h3>;
 
   if (error) return <p className="text-danger">{error}</p>;
-
+  const loggedInUserId=localStorage.getItem("userId");
+  const isOwner=loggedInUserId && parseInt(loggedInUserId)===post.userId;
   if (!post) return null;
   const handleDelete=async()=>{
     if(!confirm("Are you sure you want to delete this post?")) return;
@@ -70,7 +72,8 @@ export default function SinglePost() {
         <p style={{ lineHeight: "1.8", fontSize: "18px" }}>
           {post.content}
         </p>
-
+        {isOwner ? (
+        <>
         <div className="d-flex justify-content-end mt-4">
           <Link className="btn btn-warning me-2" to={`/posts/${post.pid}/edit`}>
             ✏ Edit
@@ -80,6 +83,11 @@ export default function SinglePost() {
             🗑 Delete
           </button>
         </div>
+        </>
+        ):(
+          <p><b>You can only view this post</b></p>
+        )
+        }
       </div>
     </div>
   );

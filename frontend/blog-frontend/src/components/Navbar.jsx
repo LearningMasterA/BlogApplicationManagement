@@ -114,7 +114,7 @@ export default function Navbar() {
           
             )}
             <li className="nav-item">
-              <Link className="nav-link" to={"/my-posts"}>My Posts</Link>
+              <Link className="nav-link" to={"/my-posts"} onClick={closeNavbar}>My Posts</Link>
             </li>
             </ul>
             </div>

@@ -28,7 +28,7 @@ function App(){
       <Route path='/create' element={<CreatePost />}/>
       <Route path='/search' element={<SearchResults/>}/>
       <Route path='/category/:id' element={<CategoryPosts/>}/>
-      <Route path='/my-posts' element={<MyPosts></MyPosts>}></Route>
+      <Route path='/my-posts' element={<MyPosts/>}></Route>
     </Routes>
     </BrowserRouter>
   );

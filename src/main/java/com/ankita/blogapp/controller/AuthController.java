@@ -1,5 +1,7 @@
 package com.ankita.blogapp.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -63,9 +65,13 @@ public class AuthController {
 		}
 		
 		UserDetails userDetails=userDetailsService.loadUserByUsername(loginDto.getUsername());
+		User user=userRepo.findByUsername(loginDto.getUsername());
 		String token = jwtUtil.generateToken(userDetails.getUsername());
 		
-		return ResponseEntity.ok(token);
+		return ResponseEntity.ok(
+				Map.of(
+						"token",token,
+						"userId",user.getId()));
 	}
 
 }

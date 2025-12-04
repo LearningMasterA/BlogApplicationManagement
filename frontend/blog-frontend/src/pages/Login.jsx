@@ -11,7 +11,8 @@ function Login(){
     try{
       const res=await api.post("/auth/login",{username,password});
       console.log("TOKEN RECEIVED:", res.data);
-      localStorage.setItem("token",res.data);
+      localStorage.setItem("token",res.data.token);
+      localStorage.setItem("userId",res.data.userId);
       console.log("SAVED TOKEN IN STORAGE:", localStorage.getItem("token"));
       alert("Login Successful!!");
       setTimeout(()=>{
