@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 
 export default function Navbar() {
   const navigate=useNavigate();
@@ -17,30 +19,41 @@ export default function Navbar() {
     setKeyword("");
   }
 
+  const closeNavbar=()=>{
+    const navbar=document.getElementById("navbarNav");
+    if(navbar.classList.contains("show")){
+      navbar.classList.remove("show");
+    }
+  }
+
   return(
     <>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
+        <Link className="navbar-brand fw-bold fs-3" to="/">
           📝 BlogApp
         </Link>
 
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          // data-bs-toggle="collapse"
+          // data-bs-target="#navbarNav"
+          // aria-controls="navbarNav"
+          // aria-expanded="false"
+          // aria-label="Toggle navigation"
+          onClick={()=>{
+            const navbar=document.getElementById("navbarNav");
+            navbar.classList.toggle("show");
+          }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto align-items-lg-center">
 
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link px-3" to="/" onClick={closeNavbar}>Home</Link>
             </li>
 
             {!isLoggedIn && (
@@ -49,23 +62,25 @@ export default function Navbar() {
               </li>
             )}
 
-            <li className="nav-item">
-              <Link className="nav-link" to={"/category/1"}>Technology</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/category/2"}>Programming</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/category/3"}>Games</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/category/4"}>Sports</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/category/4"}>Business</Link>
+            <li className="nav-item dropdown">
+              <a 
+                className="nav-link dropdown-toggle px-3"
+                href="#" 
+                role="button" 
+                data-bs-toggle="dropdown"
+              >
+                Categories
+              </a>
+               <ul className="dropdown-menu dropdown-menu-dark">
+                <li><Link className="dropdown-item" to="/category/1" onClick={closeNavbar}>Technology</Link></li>
+                <li><Link className="dropdown-item" to="/category/2" onClick={closeNavbar}>Programming</Link></li>
+                <li><Link className="dropdown-item" to="/category/3" onClick={closeNavbar}>Gaming</Link></li>
+                <li><Link className="dropdown-item" to="/category/4" onClick={closeNavbar}>Sports</Link></li>
+                <li><Link className="dropdown-item" to="/category/5" onClick={closeNavbar}>Business</Link></li>
+              </ul>
             </li>
 
-            <form className="d-flex me-3" onSubmit={handleSearch}>
+            <form className="d-flex ms-lg-3 my-2 my-lg-0" onSubmit={handleSearch}>
               <input 
               type="text"
               className="form-control me-2"
@@ -73,19 +88,19 @@ export default function Navbar() {
               value={keyword}
               onChange={(e)=>setKeyword(e.target.value)}
               />
-              <button className="btn btn-primary">Search</button>
+              <button className="btn btn-primary" onClick={closeNavbar}>Search</button>
             </form>
 
             {isLoggedIn && (
-              <li className="nav-link">
-                <Link className="nav-link" to="/create">
-                <button className="btn btn-secondary">Create Post</button>
+              <li className="nav-item ms-lg-3 mt-2 mt-lg-0">
+                <Link className="nav-link" to="/create" onClick={closeNavbar}> 
+                <button className="btn btn-outline-light">Create Post</button>
                 </Link>
               </li>
             )}
 
             {!isLoggedIn ? (
-              <li className="nav-item">
+              <li className="nav-item ms-lg-3 mt-3 mt-lg-0">
                 <Link className="nav-link btn btn-primary text-white px-3 ms-2" to="/login">
                   Login
                 </Link>
@@ -96,7 +111,11 @@ export default function Navbar() {
                   Logout
                 </button>
               </li>
+          
             )}
+            <li className="nav-item">
+              <Link className="nav-link" to={"/my-posts"}>My Posts</Link>
+            </li>
             </ul>
             </div>
       </div>

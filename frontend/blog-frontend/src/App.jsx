@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -9,6 +10,10 @@ import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import SearchResults from './pages/SearchResults';
 import CategoryPosts from './pages/CategoryPosts';
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import MyPosts from './pages/MyPosts';
 
 function App(){
   return (
@@ -23,6 +28,7 @@ function App(){
       <Route path='/create' element={<CreatePost />}/>
       <Route path='/search' element={<SearchResults/>}/>
       <Route path='/category/:id' element={<CategoryPosts/>}/>
+      <Route path='/my-posts' element={<MyPosts></MyPosts>}></Route>
     </Routes>
     </BrowserRouter>
   );
