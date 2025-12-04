@@ -6,6 +6,7 @@ function Home(){
   const [posts,setPosts]=useState([]);
   const [page,setPage]=useState(0);
   const [totalPages,setTotalPages]=useState(0);
+  const [loading,setLoading]=useState(false);
 
   const fetchPosts=async()=>{
     try{
@@ -21,6 +22,7 @@ function Home(){
 
   console.log("Calling:", `/posts?page=${page}&size=2&sortBy=createAt`);
         console.log("Full URL:", api.defaults.baseURL + `/posts?page=${page}&size=5&sortBy=createAt`);
+        
   useEffect(()=>{
     fetchPosts();
   },[page]);

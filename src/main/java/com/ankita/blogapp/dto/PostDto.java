@@ -7,6 +7,7 @@ public class PostDto {
 	private String image;
 	private int userId;
 	private int categoryId;
+	private String username;
 	
 	
 	
@@ -25,7 +26,7 @@ public class PostDto {
 	 * @param userId
 	 * @param categoryId
 	 */
-	public PostDto(int pid, String title, String content, String image, int userId, int categoryId) {
+	public PostDto(int pid, String title, String content, String image, int userId, int categoryId,String username) {
 		super();
 		this.pid = pid;
 		this.title = title;
@@ -33,11 +34,18 @@ public class PostDto {
 		this.image = image;
 		this.userId = userId;
 		this.categoryId = categoryId;
+		this.username=username;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	@Override
 	public String toString() {
 		return "PostDto [pid=" + pid + ", title=" + title + ", content=" + content + ", image=" + image + ", userId="
-				+ userId + ", categoryId=" + categoryId + "]";
+				+ userId + ", categoryId=" + categoryId + ", username=" + username + "]";
 	}
 	public int getPid() {
 		return pid;

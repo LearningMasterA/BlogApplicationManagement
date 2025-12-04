@@ -6,3 +6,8 @@
 .navbar-brand {
   font-size: 1.3rem;
 }
+
+.nav-link.active {
+  font-weight: bold;
+  color: #00eaff !important;
+}

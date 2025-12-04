@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,NavLink } from "react-router-dom";
+
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 
@@ -53,7 +54,9 @@ export default function Navbar() {
           <ul className="navbar-nav ms-auto align-items-lg-center">
 
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/" onClick={closeNavbar}>Home</Link>
+              <NavLink className={({isActive})=>"nav-link"+(isActive?"active":"")} to="/" onClick={closeNavbar}>
+               Home
+        </NavLink>
             </li>
 
             {!isLoggedIn && (
@@ -93,17 +96,17 @@ export default function Navbar() {
 
             {isLoggedIn && (
               <li className="nav-item ms-lg-3 mt-2 mt-lg-0">
-                <Link className="nav-link" to="/create" onClick={closeNavbar}> 
+                <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/create" onClick={closeNavbar}> 
                 <button className="btn btn-outline-light">Create Post</button>
-                </Link>
+                </NavLink>
               </li>
             )}
 
             {!isLoggedIn ? (
               <li className="nav-item ms-lg-3 mt-3 mt-lg-0">
-                <Link className="nav-link btn btn-primary text-white px-3 ms-2" to="/login">
+                <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/login">
                   Login
-                </Link>
+                </NavLink>
               </li>
             ) : (
               <li className="nav-item">
@@ -114,7 +117,7 @@ export default function Navbar() {
           
             )}
             <li className="nav-item">
-              <Link className="nav-link" to={"/my-posts"} onClick={closeNavbar}>My Posts</Link>
+              <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to={"/my-posts"} onClick={closeNavbar}>My Posts</NavLink>
             </li>
             </ul>
             </div>

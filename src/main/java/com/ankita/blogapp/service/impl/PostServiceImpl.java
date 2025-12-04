@@ -56,6 +56,7 @@ public class PostServiceImpl implements PostService{
 		if(post.getCategory()!=null) {
 		postDto.setCategoryId(post.getCategory().getCatId());
 		}
+		postDto.setUsername(post.getUser().getUsername());
 		return postDto;
 	}
 
